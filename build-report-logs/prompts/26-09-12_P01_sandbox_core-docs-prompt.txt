@@ -1,0 +1,42 @@
+P01
+Read AGENTS.md
+Using the product clarification document in the project t, create the project root, make the remaining core documents for yoink. Note that it should be spelled and visually shown with all lowercase letters. You have my explicit permission to create the core docs. If something in the already core made core docs does not alighn you may edit them. Once done, keep all versions at 1.0.
+If you have any questions, ask instead of assuming.
+
+A lean but implementation-complete Yoink documentation set needs these additional files:
+
+```text
+docs/
+├── 01_source_of_truth/
+│   ├── Product_Behavior_and_Interaction_SOT.md
+│   ├── Floating_Windows_Positioning_and_Multi_Display_SOT.md
+│   ├── Local_Persistence_and_Configuration_SOT.md
+│   └── Failure_Handling_and_Recovery_SOT.md
+│
+├── 02_app_specs/
+│   ├── Technical_Architecture_and_macOS_Integration_Spec.md
+│   ├── Visual_Design_Animation_Sound_and_Accessibility_Spec.md
+│   └── Local_Data_Security_and_Privacy_Spec.md
+│
+├── 03_testing/
+│   ├── Test_Plan_and_Acceptance_Criteria.md
+│   └── Sample_Data_and_Test_Fixtures.md
+│
+└── 04_operations/
+    └── Build_Signing_Notarization_and_Release_Runbook.md
+```
+
+| Document                                                  | Purpose                                                                                                                                                                                                            |
+| --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Product_Behavior_and_Interaction_SOT.md`                 | Canonical behavior for squares, labels, snippets, hover previews, copying, editing, feedback, locking, Settings, and launch at login. The existing v1 product specification should become the basis for this file. |
+| `Floating_Windows_Positioning_and_Multi_Display_SOT.md`   | Defines window level, focus behavior, dragging, coordinate storage, display identification, restoration, and disconnected-display fallback.                                                                        |
+| `Local_Persistence_and_Configuration_SOT.md`              | Defines all persisted fields, defaults, validation, storage location, schema versioning, migrations, and safe writes.                                                                                              |
+| `Failure_Handling_and_Recovery_SOT.md`                    | Defines behavior for corrupted settings, clipboard failures, unavailable displays, invalid saved positions, launch-at-login failures, and unsuccessful saves.                                                      |
+| `Technical_Architecture_and_macOS_Integration_Spec.md`    | Defines the Rust and `egui`/`eframe` structure, native macOS window integration, clipboard handling, settings window, login-item registration, and component boundaries.                                           |
+| `Visual_Design_Animation_Sound_and_Accessibility_Spec.md` | Defines square dimensions, opacity range, typography, hover-preview layout, checkmark timing, burst behavior, sound, contrast, reduced-motion behavior, and accessibility expectations.                            |
+| `Local_Data_Security_and_Privacy_Spec.md`                 | Defines local-only storage, file permissions, logging restrictions, clipboard handling, telemetry policy, and protection of potentially sensitive snippets.                                                        |
+| `Test_Plan_and_Acceptance_Criteria.md`                    | Converts every v1 requirement and approved decision into automated and manual macOS acceptance tests.                                                                                                              |
+| `Sample_Data_and_Test_Fixtures.md`                        | Defines seed snippets, multiline and symbol-label cases, saved configurations, corrupted-data fixtures, and simulated display arrangements.                                                                        |
+| `Build_Signing_Notarization_and_Release_Runbook.md`       | Defines reproducible builds, app bundling, code signing, notarization, installation, upgrades, launch-at-login verification, and release checks.                                                                   |
+
+This is the complete recommended set. Yoink does not need separate backend, API, server database, cloud-storage, web-security, or deployment documents.
