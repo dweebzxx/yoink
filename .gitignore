@@ -1,6 +1,20 @@
 .DS_Store
 .yoink-private/
 
+# Host Workflow / repository-control (protected, private)
+.agents
+.claude
+.grok
+AGENTS.md
+CLAUDE.md
+docs
+skills-lock.json
+
+# Working files not for the public repo
+brand/
+build-report-logs/
+yoink — v1 product specification.md
+
 # Build products (never committed)
 .build/
 build/
