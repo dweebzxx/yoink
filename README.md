@@ -83,7 +83,6 @@ yoink/
 ├── Tests/YoinkCoreTests/ # Swift Testing suites and JSON fixtures
 └── scripts/build-app.zsh # builds dist/yo!nk.app
 assets/                   # app icon, square art, menu-bar icon, sound
-brand/                    # color palette
 ```
 
 ## Privacy
