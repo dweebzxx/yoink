@@ -1,0 +1,99 @@
+P02
+
+[Initial session prompt]
+Reset this project to build for a macOS native build app. Im assuming it will be appkit/swift. You will need to edit AGENTS.md accordingly and edit the core docs to be for a appkit/swift build. The features should be just about the same as to what we were building with rust. Youll need to remove all rust specific documents and edit them accordingly. Also we are making the app stylized as 'yo!nk' 
+You have permission to edit the core docs as well.
+
+[Mid-turn follow-up 1]
+It should be gala now.
+
+[Mid-turn follow-up 2]
+Copy those files into the correct location in /Volumes/etcetera/etceteraOS/ai-projects/code-playground/yoink and delete the wrong symlink
+
+[Mid-turn follow-up 3]
+Remove all mention of the previous build. It should be as if the appkit/swift build is the only known build
+
+[Mid-turn follow-up 4]
+The current /Volumes/etcetera/etceteraOS/ai-projects/code-playground/yoink/assets/prompt-attachments/app-assets and /Volumes/etcetera/etceteraOS/ai-projects/code-playground/yoink/brand are accurate.
+
+[Mid-turn follow-up 5]
+Ensure that the specs for yo!nk are sound and realistic for an app like this.
+
+[Mid-turn follow-up 6]
+delete  target/ and dist/yoink.app
+
+[Follow-up 7]
+Ask me all the questions in an easy to understand way free of technical jargon
+
+[Human answers to Open Questions 1-10, 2026-09-22]
+OQ1 Home base: Menu bar mostly. Dock and menu bar if settings page is open.
+OQ2 Look: Small, mostly solid (Recommended)
+OQ3 Sound: 'hehe' + on/off switch (Recommended)
+OQ4 Screen gone: Move over, then return (Recommended)
+OQ5 Labels: No blanks, repeats OK (Recommended)
+OQ6 Damaged save: Ask me (Recommended)
+OQ7 Desktops: Only where I put them; confirmed "That's fine" after being told squares return on the current desktop after relaunch
+OQ8 Drag vs copy: Moving doesn't copy (Recommended)
+OQ9 Long text: Fill screen + '…more' (Recommended)
+OQ10 Install: Direct, Sonoma+ (Recommended)
+
+[Human answers, second round]
+First effect: checkmark and shake the button. The checkmark should be in the font/art style of the art assets
+Auto-start: Off until I turn it on (Recommended)
+File name: yo!nk.app (Recommended)
+Hidden ID: com.dweebzxx.yoink (Recommended)
+
+[Mid-turn follow-up 8]
+Also research what AI coding CLI skills would be useful for building this. Provide links to specific skills
+
+[Mid-turn follow-up 9]
+Have the button start at size 70x70
+
+[Human answer: size range]
+70x70 should be the smallest. 160x160 biggest.
+
+[Follow-up 10]
+Any other features for this app that would be useful/relevant?
+
+[Follow-up 11]
+Keyboard shortcut - yes
+hide/show all = yes
+right click on square - yes
+tidy up - yes
+undo - yes
+search in settings - yes
+add history in settings too
+
+[Human answers, feature details]
+History: Where else is the history being saved at then?  ->  (after explanation) Just a list of all the snippets that have been used in any square
+Undo: Any change (Recommended)
+Tidy up: Add a macro for this that snaps all squares into a grid. Add a button in settings too for this. When you click the icon in menu the dropdown should include snap to grid button.
+When: First version (Recommended)
+Shortcuts: Only the 2 app shortcuts (Recommended)
+
+[Follow-up 12]
+Look through /Volumes/etcetera/etceteraOS/ai-projects/code-playground/yoink/assets/import-skills and put the relevant useful skills here /Volumes/etcetera/etceteraOS/ai-projects/code-playground/yoink/.yoink-private/.agents/skills
+
+Then symlink these folders /Volumes/etcetera/etceteraOS/ai-projects/code-playground/yoink/.yoink-private/.agents, /Volumes/etcetera/etceteraOS/ai-projects/code-playground/yoink/.yoink-private/.claude, /Volumes/etcetera/etceteraOS/ai-projects/code-playground/yoink/.yoink-private/.grok here /Volumes/etcetera/etceteraOS/ai-projects/code-playground/yoink
+
+Then make sure '/Volumes/etcetera/etceteraOS/ai-projects/code-playground/yoink/yoink — v1 product specification.md' is updated and remove any of the irrelevant not needed information from it.
+
+Then from the approved skills, make a copy of /Volumes/etcetera/etceteraOS/ai-projects/code-playground/yoink/.yoink-private/skills-lock-example.json and lock the skills. Make a symlink of the skills lock in here /Volumes/etcetera/etceteraOS/ai-projects/code-playground/yoink
+
+For the approved skills, you may edit them to make them more applicable to the project if needed. 
+Symlink the skills from .agents to .claude and .grok
+
+[Human answers, skills]
+Settings UI: Taking into account what this app is meant for, what is the most effective code langauge to use to build this for macOS? Ill be building this on my macbook Air M3 16gb macOS27. (use the internet to see latest macos release as of sep 2026)
+Build tools: Skip for now (Recommended)
+Toolkit: Yes, that mix (Recommended)
+
+[Follow-up 13]
+Make sure all the usefull skills have been added to the skills folder.
+
+[Follow-up 14]
+Reasearch best practices and techniques for prompting CLI coding agents as of sep 2026. Create a one-shot prompt (P03) that builds the entire app, all the way to the end based on the specs we layed down in the core docs. Make sure the prompt includes that assets are here /Volumes/etcetera/etceteraOS/ai-projects/code-playground/yoink/assets/prompt-attachments/app-assets and that the color choices are /Volumes/etcetera/etceteraOS/ai-projects/code-playground/yoink/brand
+also make sure it builds the app here /Volumes/etcetera/etceteraOS/ai-projects/code-playground/yoink/dist and put the full copy and paste ready prompt here /Volumes/etcetera/etceteraOS/ai-projects/code-playground/yoink/build-report-logs/outputs
+
+[Mid-turn follow-up 15]
+Try not to overly guide the agent thats building the app since you are bias

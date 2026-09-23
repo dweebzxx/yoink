@@ -1,1 +1,1 @@
-/Volumes/etcetera/etceteraOS/ai-projects/code-playground/apps/yoink/.yoink-private/AGENTS.md
+.yoink-private/AGENTS.md
