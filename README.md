@@ -69,7 +69,7 @@ open -n 'dist/yo!nk.app' --args --config-dir "$PWD/yoink/.build/smoke-config"
 swift test --package-path yoink
 ```
 
-The tests cover the product logic without launching the app: label rules, saving and reloading (including damaged files), exact multiline copying, undo and redo, Snap to Grid, display fallback, snippet history, and shortcuts. They write only to `yoink/.build/test-tmp/`.
+Covers the product logic without launching the app. Writes only to `yoink/.build/test-tmp/`.
 
 ## Project layout
 
