@@ -1,2 +1,10 @@
 .DS_Store
 .yoink-private/
+
+# Build products (never committed)
+.build/
+build/
+DerivedData/
+dist/
+*.xcarchive
+.swiftpm/

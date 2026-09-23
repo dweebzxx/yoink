@@ -1,0 +1,25 @@
+{
+  "history": [
+    {
+      "id": "0B7A3C1E-0000-4000-8000-000000000101",
+      "label": "A",
+      "lastUsed": "2026-09-22T10:00:00Z",
+      "text": "cd /Volumes/etcetera/etceteraOS/ai-projects/code-playground-beta/spicedanime-webapp-docs\nagy --dangerously-skip-permissions"
+    }
+  ],
+  "preferences": {
+    "feedbackMode": "burst",
+    "hideShowShortcut": {
+      "keyCode": 4,
+      "modifiers": 6144
+    },
+    "launchAtLogin": false,
+    "opacity": 0.6,
+    "playSound": false,
+    "positionsLocked": true,
+    "snapShortcut": null,
+    "squareSize": 96,
+    "squaresHidden": true
+  },
+  "schemaVersion": 1
+}

@@ -1,0 +1,90 @@
+{
+  "history": [
+    {
+      "id": "0B7A3C1E-0000-4000-8000-000000000101",
+      "label": "A",
+      "lastUsed": "2026-09-22T10:00:00Z",
+      "text": "cd /Volumes/etcetera/etceteraOS/ai-projects/code-playground-beta/spicedanime-webapp-docs\nagy --dangerously-skip-permissions"
+    }
+  ],
+  "preferences": {
+    "feedbackMode": "burst",
+    "hideShowShortcut": {
+      "keyCode": 4,
+      "modifiers": 6144
+    },
+    "launchAtLogin": false,
+    "opacity": 0.6,
+    "playSound": false,
+    "positionsLocked": true,
+    "snapShortcut": null,
+    "squareSize": 96,
+    "squaresHidden": true
+  },
+  "schemaVersion": 1,
+  "squares": [
+    {
+      "label": "S",
+      "text": "cd /Volumes/etcetera/etceteraOS/ai-projects/code-playground/spicedanime-webapp",
+      "placement": {
+        "displayID": "disp-1",
+        "x": 40,
+        "y": 60,
+        "displayWidth": 1512,
+        "displayHeight": 982
+      }
+    },
+    {
+      "id": "0B7A3C1E-0000-4000-8000-000000000002",
+      "label": "O",
+      "text": "cd /Volumes/etcetera/etceteraOS/ai-projects/code-playground/spicedanime-webapp/spicy-project-manager/outputs",
+      "placement": {
+        "displayID": "disp-1",
+        "x": 40,
+        "y": 180,
+        "displayWidth": 1512,
+        "displayHeight": 982
+      }
+    },
+    {
+      "id": "0B7A3C1E-0000-4000-8000-000000000003",
+      "label": "C",
+      "text": "codex --yolo",
+      "placement": {
+        "displayID": "disp-2",
+        "x": 900,
+        "y": 60,
+        "displayWidth": 1920,
+        "displayHeight": 1080
+      },
+      "shortcut": {
+        "keyCode": 18,
+        "modifiers": 6144
+      }
+    },
+    {
+      "id": "0B7A3C1E-0000-4000-8000-000000000004",
+      "label": "CL",
+      "text": "claude --dangerously-skip-permissions",
+      "placement": {
+        "displayID": "disp-2",
+        "x": 900,
+        "y": 180,
+        "displayWidth": 1920,
+        "displayHeight": 1080
+      }
+    },
+    {
+      "id": "0B7A3C1E-0000-4000-8000-000000000005",
+      "label": "A",
+      "text": "cd /Volumes/etcetera/etceteraOS/ai-projects/code-playground-beta/spicedanime-webapp-docs\nagy --dangerously-skip-permissions",
+      "placement": {
+        "displayID": "disp-2",
+        "x": 900,
+        "y": 300,
+        "displayWidth": 1920,
+        "displayHeight": 1080
+      }
+    }
+  ]
+}
