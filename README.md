@@ -30,7 +30,7 @@ yo!nk only copies. It never runs, pastes, or opens anything, so a snippet that l
 - Adjustable square size (40–160 pt) and opacity (30–100%)
 - Per-square global keyboard shortcuts, with no Accessibility permission needed
 - Hide/Show All Squares (⌃⌥H) and Snap to Grid (⌃⌥G), both changeable
-- A right-click menu on each square: Edit…, Duplicate, Delete, Lock/Unlock Positions, Hide All Squares
+- A right-click menu on each square: Edit…, Duplicate, Delete, Lock/Unlock Positions, Hide/Show this square, Hide All Squares
 - Undo and redo (⌘Z / ⇧⌘Z) for edits, moves, settings, and Snap to Grid
 - A Settings window with search, snippet history, and a launch-at-login switch
 

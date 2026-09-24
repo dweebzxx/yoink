@@ -73,7 +73,7 @@ public enum ConfigCodec {
     static let documentKeys: Set<String> = ["schemaVersion", "preferences", "squares", "history"]
     static let preferenceKeys: Set<String> = ["squareSize", "opacity", "playSound", "feedbackMode", "positionsLocked",
                                               "launchAtLogin", "squaresHidden", "hideShowShortcut", "snapShortcut"]
-    static let squareKeys: Set<String> = ["id", "label", "text", "placement", "shortcut"]
+    static let squareKeys: Set<String> = ["id", "label", "text", "placement", "shortcut", "isHidden"]
     static let placementKeys: Set<String> = ["displayID", "x", "y", "displayWidth", "displayHeight"]
     static let shortcutKeys: Set<String> = ["keyCode", "modifiers"]
     static let historyKeys: Set<String> = ["id", "text", "label", "lastUsed"]

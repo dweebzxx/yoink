@@ -28,10 +28,15 @@ struct SquaresPane: View {
                                 .lineLimit(1)
                                 .truncationMode(.tail)
                                 .foregroundStyle(square.text.isEmpty ? .secondary : .primary)
+                            if square.isHidden {
+                                Spacer(minLength: 4)
+                                Image(systemName: "eye.slash").foregroundStyle(.secondary)
+                            }
                         }
                         .tag(square.id)
                         .contextMenu {
                             Button("Duplicate") { select(app.duplicate(square.id)) }
+                            Button(square.isHidden ? "Show" : "Hide") { store.setSquareHidden(square.id, !square.isHidden) }
                             Button("Delete") { delete(square.id) }
                         }
                     }
@@ -118,6 +123,15 @@ struct SquareEditor: View {
                 ShortcutField(title: "Shortcut", app: app, owner: .square(squareID))
             } footer: {
                 Text("The shortcut copies this square from any app.").font(.caption).foregroundStyle(.secondary)
+            }
+            Section {
+                Toggle(isOn: Binding(get: { square?.isHidden ?? false }, set: { store.setSquareHidden(squareID, $0) })) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("Hide this square")
+                        Text("Removed from the screen until shown again here or from its right-click menu.").font(.caption).foregroundStyle(.secondary)
+                    }
+                }
+                .toggleStyle(.switch)
             }
             Section("Text") {
                 SnippetTextEditor(text: Binding(

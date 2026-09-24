@@ -125,6 +125,12 @@ public final class YoinkStore {
         perform("Delete Square") { $0.squares.removeAll { $0.id == id } }
     }
 
+    /// Hides or shows one square (distinct from the global Hide/Show All). An undo step.
+    public func setSquareHidden(_ id: UUID, _ hidden: Bool) {
+        guard square(id)?.isHidden != hidden else { return }
+        mutateSquare(id, name: hidden ? "Hide Square" : "Show Square", coalesce: nil) { $0.isHidden = hidden }
+    }
+
     public func moveSquare(_ id: UUID, to placement: Placement) {
         guard !preferences.positionsLocked else { return }
         mutateSquare(id, name: "Move Square", coalesce: nil) { $0.placement = placement }

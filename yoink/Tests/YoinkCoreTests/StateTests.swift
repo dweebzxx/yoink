@@ -17,6 +17,7 @@ struct StateTests {
         #expect(!p.positionsLocked && !p.launchAtLogin && !p.squaresHidden)
         #expect(p.hideShowShortcut == .defaultHideShowAll && p.snapShortcut == .defaultSnapToGrid)
         #expect(doc.squares.allSatisfy { $0.shortcut == nil })
+        #expect(doc.squares.allSatisfy { !$0.isHidden })
         // Seeds are on-screen on the main display and do not overlap.
         for square in doc.squares {
             let r = PlacementResolver.resolve(square.placement, squareSize: 70, displays: [Displays.one])
@@ -58,6 +59,26 @@ struct StateTests {
         #expect(store.square(id) == nil)
         #expect(store.square(copy) != nil)
         #expect(store.squares.count == 6)
+    }
+
+    @Test func hidingASquareIsIndependentOfOthersAndOfHideAll() {
+        let store = makeStore()
+        let id = store.squares[0].id
+        let otherID = store.squares[1].id
+        #expect(!(store.square(id)?.isHidden ?? true))
+
+        store.setSquareHidden(id, true)
+        #expect(store.square(id)?.isHidden == true)
+        #expect(store.square(otherID)?.isHidden == false)
+        #expect(!store.preferences.squaresHidden, "per-square hide does not touch the global Hide All flag")
+
+        // Setting the same value again is a no-op: no new undo step.
+        let name = store.undoActionName
+        store.setSquareHidden(id, true)
+        #expect(store.undoActionName == name)
+
+        store.setSquareHidden(id, false)
+        #expect(store.square(id)?.isHidden == false)
     }
 
     @Test func duplicateLabelsAreAllowedAndDoNotAffectBehavior() throws {

@@ -38,8 +38,9 @@ final class SquaresController: NSObject, SquareViewDelegate, NSMenuDelegate {
                 let frame = ScreenMap.frame(origin: resolved.origin, size: size, on: screen)
                 if entry.panel.frame != frame { entry.panel.setFrame(frame, display: true) }
             }
-            if prefs.squaresHidden {
+            if prefs.squaresHidden || square.isHidden {
                 entry.panel.orderOut(nil)
+                if hoveredID == square.id { hidePreview() }
             } else if !entry.panel.isVisible {
                 entry.panel.orderFrontRegardless()
             }
@@ -132,6 +133,7 @@ final class SquaresController: NSObject, SquareViewDelegate, NSMenuDelegate {
         hidePreview()
         menuSquareID = view.squareID
         let locked = app.store.preferences.positionsLocked
+        let hidden = app.store.square(view.squareID)?.isHidden ?? false
         let menu = NSMenu()
         menu.autoenablesItems = false
         menu.addItem(item("Edit…", #selector(menuEdit)))
@@ -139,6 +141,7 @@ final class SquaresController: NSObject, SquareViewDelegate, NSMenuDelegate {
         menu.addItem(item("Delete", #selector(menuDelete)))
         menu.addItem(.separator())
         menu.addItem(item(locked ? "Unlock Positions" : "Lock Positions", #selector(menuToggleLock)))
+        menu.addItem(item(hidden ? "Show Square" : "Hide Square", #selector(menuToggleHideSquare)))
         menu.addItem(item("Hide All Squares", #selector(menuHideAll)))
         NSMenu.popUpContextMenu(menu, with: event, for: view)
     }
@@ -163,6 +166,11 @@ final class SquaresController: NSObject, SquareViewDelegate, NSMenuDelegate {
 
     @objc private func menuToggleLock() {
         app.store.setPositionsLocked(!app.store.preferences.positionsLocked)
+    }
+
+    @objc private func menuToggleHideSquare() {
+        guard let id = menuSquareID else { return }
+        app.store.setSquareHidden(id, !(app.store.square(id)?.isHidden ?? false))
     }
 
     @objc private func menuHideAll() {

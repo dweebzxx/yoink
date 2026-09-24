@@ -19,7 +19,7 @@ struct PersistenceTests {
         let squares = [
             Square(label: "A", text: Fixture.seedA, placement: placement("disp-1", 10, 30)),
             Square(label: "M1", text: Fixture.multiBlank, placement: placement("disp-2", 500.5, 700.25), shortcut: KeyShortcut(keyCode: 18, modifiers: 6144)),
-            Square(label: "M2", text: Fixture.multiTrailing, placement: placement("disp-2", 0, 0)),
+            Square(label: "M2", text: Fixture.multiTrailing, placement: placement("disp-2", 0, 0), isHidden: true),
             Square(label: "e\u{301}1", text: "", placement: placement()),
             Square(label: "🙂🚀", text: "crlf\r\nand\ttab", placement: placement()),
         ]
@@ -56,6 +56,7 @@ struct PersistenceTests {
         #expect(doc.squares.filter { $0.placement.displayID == "disp-2" }.map(\.label) == ["C", "CL", "A"])
         #expect(doc.squares[4].text == Fixture.seedA)
         #expect(doc.squares[2].shortcut == KeyShortcut(keyCode: 18, modifiers: 6144))
+        #expect(doc.squares.allSatisfy { !$0.isHidden }, "squares saved before isHidden existed default to visible")
         #expect(doc.squares[1].placement == Placement(displayID: "disp-1", x: 40, y: 180, displayWidth: 1512, displayHeight: 982))
         let p = doc.preferences
         #expect(p.feedbackMode == .burst && p.positionsLocked && !p.playSound && p.squaresHidden)

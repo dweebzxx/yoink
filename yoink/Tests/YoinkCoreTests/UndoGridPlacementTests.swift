@@ -24,6 +24,8 @@ struct UndoGridPlacementTests {
             ("Change Copy Sound", { store.setPlaySound(false) }),
             ("Lock Positions", { store.setPositionsLocked(true) }),
             ("Unlock Positions", { store.setPositionsLocked(false) }),
+            ("Hide Square", { store.setSquareHidden(id, true) }),
+            ("Show Square", { store.setSquareHidden(id, false) }),
             ("Snap to Grid", { store.snapToGrid(displays: [Displays.one]) }),
         ]
         for (name, change) in changes {

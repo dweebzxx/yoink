@@ -55,13 +55,40 @@ public struct Square: Codable, Hashable, Identifiable, Sendable {
     public var text: String
     public var placement: Placement
     public var shortcut: KeyShortcut?
+    public var isHidden: Bool
 
-    public init(id: UUID = UUID(), label: String, text: String, placement: Placement, shortcut: KeyShortcut? = nil) {
+    public init(id: UUID = UUID(), label: String, text: String, placement: Placement, shortcut: KeyShortcut? = nil, isHidden: Bool = false) {
         self.id = id
         self.label = label
         self.text = text
         self.placement = placement
         self.shortcut = shortcut
+        self.isHidden = isHidden
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case id, label, text, placement, shortcut, isHidden
+    }
+
+    // `isHidden` defaults to false for documents saved before this field existed.
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = try c.decode(UUID.self, forKey: .id)
+        label = try c.decode(String.self, forKey: .label)
+        text = try c.decode(String.self, forKey: .text)
+        placement = try c.decode(Placement.self, forKey: .placement)
+        shortcut = try c.decodeIfPresent(KeyShortcut.self, forKey: .shortcut)
+        isHidden = try c.decodeIfPresent(Bool.self, forKey: .isHidden) ?? false
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var c = encoder.container(keyedBy: CodingKeys.self)
+        try c.encode(id, forKey: .id)
+        try c.encode(label, forKey: .label)
+        try c.encode(text, forKey: .text)
+        try c.encode(placement, forKey: .placement)
+        try c.encode(shortcut, forKey: .shortcut)
+        try c.encode(isHidden, forKey: .isHidden)
     }
 }
 
