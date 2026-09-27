@@ -5,8 +5,8 @@
 <h1 align="center">yo!nk</h1>
 
 <p align="center">
-  <b>Tiny floating squares for the text you paste all the time.</b><br>
-  Hover to read. Click to copy. Yoink.
+  <b>Tiny adorable floating buddies for the text you paste all the time.</b><br>
+  Hover to read. Click to copy. Yoink!
 </p>
 
 <p align="center">
@@ -18,37 +18,37 @@
 
 ---
 
-## The problem
+## Meet your new buddies
 
-You have those three commands. That email sign-off. That API key format you can never remember. You keep it in a notes app, a text file, or your shell history, and you dig for it about forty times a day.
+yo!nk is a small native macOS menu-bar app. Every snippet gets its very own little floating square, and they hang out above your other windows on whichever display you like.
 
-## The fix
-
-yo!nk is a small native macOS menu-bar app. Every snippet gets its own little floating square that sits above your other windows, on whichever display you like.
-
-- **Hover** a square to read the whole snippet beside it, line breaks and all.
+- **Hover** a buddy to read the whole snippet beside it, line breaks and all.
 - **Click** it to copy the complete text, then paste with ⌘V wherever you want.
 
-That's the whole trick. yo!nk only copies. It never runs, pastes, or opens anything, so a snippet that looks like a Terminal command is still just text. (Yes, on purpose.)
+That's it. That's the whole trick. yo!nk only copies. It never runs, pastes, or opens anything, so a snippet that looks like a Terminal command is still just text. (Your buddies are very well behaved.)
 
-## What you get
+## What they can do
 
-- **Squares, not a window.** One translucent floating square per snippet. No title bar, no chrome, no big panel hogging your screen.
-- **Short labels.** One to four letters, numbers, symbols, or emoji. Three characters or fewer sit on one line, and a four-character label stacks as two rows of two, so `ABCD` fits as `AB` over `CD`.
+- **Squares, not a window.** One translucent floating buddy per snippet. No title bar, no chrome, no big panel hogging your screen.
+- **Tiny labels.** Give each one a name of one to four letters, numbers, symbols, or emoji. Three characters or fewer sit on one line, and a four-character label stacks up as two rows of two, so `ABCD` becomes `AB` over `CD`.
 - **Hover preview.** The complete text, line breaks kept. Very long snippets wrap and end with "… N more lines".
-- **Click to copy,** with a short sound and your pick of a checkmark, a burst, or no visual change at all.
-- **Drag them anywhere,** across multiple displays. Positions are remembered. Lock them if your mouse has opinions.
-- **Your size, your see-through.** Squares default to a tidy 40 pt, and you can go from 30 to 160 pt. Opacity runs from 30 to 100%.
-- **Global shortcuts** for individual squares, with no Accessibility permission needed.
-- **Hide/Show All** (⌃⌥H) and **Snap to Grid** (⌃⌥G). Both shortcuts are changeable.
-- **Show in screenshots.** Squares are always on your screen, so there's a switch that leaves them out of screenshots and screen recordings while keeping them visible to you. It's on by default. (It relies on macOS, so a capture tool that does its own thing may ignore it.)
-- **A right-click menu** on every square: Edit…, Duplicate, Delete, Lock/Unlock Positions, Hide this square, Hide All Squares.
-- **Undo and redo** (⌘Z / ⇧⌘Z) for edits, moves, settings, and Snap to Grid. Because everyone fat-fingers a drag.
+- **Happy little feedback.** Every copy gets a short sound and your pick of a checkmark, a burst, or no visual change at all.
+- **Go for a walk.** Drag them anywhere, across multiple displays. They even wander along with you while you drag, and they remember where you left them. Lock them in place if you'd rather they stay put.
+- **Your size, your see-through.** Buddies start at a tidy 40 pt, and you can go from 30 to 160 pt. Opacity runs from 30 to 100%.
+- **Shortcuts for each one.** Give any buddy its own global keyboard shortcut. No Accessibility permission needed.
+- **Nap time.** Hide/Show All (⌃⌥H) sends everyone away and brings them back. Snap to Grid (⌃⌥G) lines them all up. Both shortcuts are changeable.
+- **Camera shy?** Turn off **Show in screenshots** and your buddies stay on your screen but sneak out of screenshots and screen recordings. It's on by default. (It relies on macOS, so a capture tool that does its own thing may ignore it.)
+- **A right-click menu** on every buddy: Edit…, Duplicate, Delete, Lock/Unlock Positions, Hide this square, Hide All Squares.
+- **Undo and redo** (⌘Z / ⇧⌘Z) for edits, moves, settings, and Snap to Grid. Everyone fat-fingers a drag sometimes.
 - **A proper Settings window** with search, snippet history, and a launch-at-login switch.
 
 ## Status
 
-Early days. This is version 0.2.0, which means initial development: things can still change. There are no download builds yet, so for now you build it yourself. It takes one command.
+Early days! yo!nk is at version 0.2.0, which means initial development: things can still change.
+
+**Download it:** grab the zip from the [Releases page](https://github.com/dweebzxx/yoink/releases) (it's a pre-release), unzip it, and put `yo!nk.app` wherever you like. It's signed ad hoc rather than notarized, so macOS may block the first launch. If it does, open System Settings, go to Privacy & Security, and choose **Open Anyway**.
+
+**Or build it yourself:** it takes one command (see below).
 
 ## Requirements
 
@@ -67,7 +67,7 @@ This makes a Release build and writes `dist/yo!nk.app`, signed ad hoc so it runs
 
 > **Heads up:** the app's name contains a `!`, so quote the path in your shell: `open 'dist/yo!nk.app'`.
 
-yo!nk lives in your menu bar. Choose **Settings…** from its icon to add and edit squares. You'll only see a Dock icon while Settings is open.
+yo!nk lives in your menu bar. Choose **Settings…** from its icon to add and edit your buddies. You'll only see a Dock icon while Settings is open.
 
 ### Trying it without touching your real data
 
@@ -103,7 +103,7 @@ assets/                   # app icon, square art, menu-bar icon, sound
 
 ## Privacy
 
-Short version: it's your text, and it stays on your Mac.
+Your buddies keep your secrets. Your text stays on your Mac.
 
 - Squares, snippets, history, and settings live in one local file that only your user account can read.
 - No accounts, no sync, no network, no analytics.
