@@ -111,11 +111,13 @@ final class SquareView: NSView {
         let font = Art.labelFont(size: pointSize)
         labelLayer.font = font
         labelLayer.fontSize = pointSize
-        labelLayer.string = label
+        let rows = LabelLayout.rows(for: label)
+        labelLayer.string = rows.joined(separator: "\n")
         labelLayer.contentsScale = scale
         let lineHeight = ceil(font.ascender - font.descender)
+        let blockHeight = lineHeight * CGFloat(rows.count)
         let center = CGPoint(x: b.width * Art.faceCenter.x, y: b.height * Art.faceCenter.y)
-        labelLayer.frame = CGRect(x: 0, y: center.y - lineHeight / 2, width: b.width, height: lineHeight)
+        labelLayer.frame = CGRect(x: 0, y: center.y - blockHeight / 2, width: b.width, height: blockHeight)
             .offsetBy(dx: center.x - b.width / 2, dy: 0)
         labelLayer.opacity = labelAlpha
         labelLayer.isHidden = isDragging || !checkLayer.isHidden

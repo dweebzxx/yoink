@@ -38,7 +38,7 @@ enum Art {
         return NSFont(descriptor: rounded, size: size) ?? base
     }
 
-    /// Label point size for a square: one character reads larger than two.
+    /// Label point size for a square: one character reads larger than two to four.
     static func labelPointSize(for label: String, squareSize: CGFloat) -> CGFloat {
         squareSize * (label.count <= 1 ? 0.42 : 0.33)
     }

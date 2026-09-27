@@ -13,25 +13,26 @@ struct StateTests {
         #expect(doc.squares[4].text.split(separator: "\n", omittingEmptySubsequences: false).count == 2)
         #expect(Set(doc.squares.map(\.id)).count == 5)
         let p = doc.preferences
-        #expect(p.squareSize == 70 && p.opacity == 0.85 && p.playSound && p.feedbackMode == .checkmark)
+        #expect(p.squareSize == 40 && p.opacity == 0.85 && p.playSound && p.feedbackMode == .checkmark)
         #expect(!p.positionsLocked && !p.launchAtLogin && !p.squaresHidden)
+        #expect(p.showInScreenshots == true)
         #expect(p.hideShowShortcut == .defaultHideShowAll && p.snapShortcut == .defaultSnapToGrid)
         #expect(doc.squares.allSatisfy { $0.shortcut == nil })
         #expect(doc.squares.allSatisfy { !$0.isHidden })
         // Seeds are on-screen on the main display and do not overlap.
         for square in doc.squares {
-            let r = PlacementResolver.resolve(square.placement, squareSize: 70, displays: [Displays.one])
+            let r = PlacementResolver.resolve(square.placement, squareSize: 40, displays: [Displays.one])
             #expect(r?.adjusted == false)
         }
     }
 
-    @Test(arguments: ["S", "C1", "CL", ">", "//", "$", "Aa", "e\u{301}1", "🙂", "🙂🚀", "👩‍💻"])
+    @Test(arguments: ["S", "C1", "CL", ">", "//", "$", "Aa", "e\u{301}1", "🙂", "🙂🚀", "👩‍💻", "ABC", "ABCD", "🙂🚀🙂🚀"])
     func acceptedLabels(_ label: String) {
         #expect(LabelRules.validate(label) == nil)
     }
 
     @Test func rejectedLabels() {
-        #expect(LabelRules.validate("CL1") == .tooLong)
+        #expect(LabelRules.validate("CL123") == .tooLong)
         #expect(LabelRules.validate("") == .empty)
         #expect(LabelRules.validate("  ") == .onlySpaces)
         #expect(LabelRules.validate(" ") == .onlySpaces)
@@ -47,7 +48,7 @@ struct StateTests {
         #expect(store.square(id)?.label == "M2")
         #expect(store.square(id)?.text == Fixture.multiTrailing)
 
-        #expect(throws: LabelError.tooLong) { try store.updateLabel(id, to: "CL1") }
+        #expect(throws: LabelError.tooLong) { try store.updateLabel(id, to: "CL123") }
         #expect(store.square(id)?.label == "M2")
 
         let copy = try #require(store.duplicateSquare(id, placement: placement("disp-1", 120, 120)))
@@ -118,5 +119,21 @@ struct StateTests {
                 #expect(!source.contains(token), "\(file.lastPathComponent) contains \(token)")
             }
         }
+    }
+}
+
+@Suite("Label layout")
+struct LabelLayoutTests {
+    @Test(arguments: [
+        ("A", ["A"]),
+        ("AB", ["AB"]),
+        ("ABC", ["AB", "C"]),
+        ("ABCD", ["AB", "CD"]),
+        ("🙂🚀🙂", ["🙂🚀", "🙂"]),
+        ("🙂🚀🙂🚀", ["🙂🚀", "🙂🚀"]),
+        ("e\u{301}1XY", ["e\u{301}1", "XY"]),
+    ])
+    func rows(_ label: String, _ expected: [String]) {
+        #expect(LabelLayout.rows(for: label) == expected)
     }
 }

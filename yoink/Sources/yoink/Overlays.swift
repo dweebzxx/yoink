@@ -5,6 +5,12 @@ import YoinkCore
 /// Borderless, non-activating, click-through overlay used by the hover preview, the burst,
 /// and the drag animation. It never becomes key or main and ignores every mouse event.
 final class OverlayPanel: NSPanel {
+    /// Sharing type for every overlay (Decision #60). `SquaresController.reconcile()` keeps it
+    /// current; new panels read it when created and long-lived panels call `refreshSharing()`.
+    static var sharing: NSWindow.SharingType = .readOnly
+
+    func refreshSharing() { sharingType = Self.sharing }
+
     init(level: NSWindow.Level) {
         super.init(contentRect: .zero, styleMask: [.borderless, .nonactivatingPanel], backing: .buffered, defer: true)
         isFloatingPanel = true // sets the floating level, so the requested level goes after it
@@ -18,6 +24,7 @@ final class OverlayPanel: NSPanel {
         isReleasedWhenClosed = false
         animationBehavior = .none
         collectionBehavior = [.ignoresCycle, .transient]
+        sharingType = Self.sharing
     }
 
     override var canBecomeKey: Bool { false }
@@ -35,6 +42,8 @@ final class PreviewController {
     private let background = NSView()
     private let textField = NSTextField(labelWithString: "")
     private let font = NSFont.monospacedSystemFont(ofSize: 12, weight: .regular)
+
+    func refreshSharing() { panel.refreshSharing() }
 
     init() {
         background.wantsLayer = true
@@ -157,6 +166,8 @@ final class DragAnimation {
     private let imageView = NSImageView()
     private let label = NSTextField(labelWithString: "")
 
+    func refreshSharing() { panel.refreshSharing() }
+
     init() {
         imageView.imageScaling = .scaleProportionallyUpOrDown
         imageView.animates = true
@@ -181,7 +192,7 @@ final class DragAnimation {
         imageView.alphaValue = opacity
         let pointSize = Art.labelPointSize(for: text, squareSize: s)
         label.font = Art.labelFont(size: pointSize)
-        label.stringValue = text
+        label.stringValue = LabelLayout.rows(for: text).joined(separator: "\n")
         label.alphaValue = 0.5 + 0.5 * opacity
         label.sizeToFit()
         let bodyCenter = NSPoint(x: size.width * Art.dragBodyCenter.x, y: size.height * (1 - Art.dragBodyCenter.y))

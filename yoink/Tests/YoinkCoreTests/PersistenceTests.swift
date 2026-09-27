@@ -12,6 +12,7 @@ struct PersistenceTests {
         prefs.playSound = false
         prefs.feedbackMode = .burst
         prefs.positionsLocked = true
+        prefs.showInScreenshots = false
         prefs.launchAtLogin = true
         prefs.squaresHidden = true
         prefs.hideShowShortcut = nil
@@ -36,6 +37,34 @@ struct PersistenceTests {
         #expect(files.load() == .loaded(doc))
         let mode = try FileManager.default.attributesOfItem(atPath: files.fileURL.path)[.posixPermissions] as? Int
         #expect(mode == 0o600)
+    }
+
+    @Test func screenshotsOffFixtureLoadsSavesAndReloadsAsOff() throws {
+        guard case .loaded(let doc) = ConfigCodec.decode(try Fixture.data("cfg-screenshots-off.json")) else {
+            Issue.record("fixture did not load")
+            return
+        }
+        #expect(doc.schemaVersion == 1)
+        #expect(doc.preferences.showInScreenshots == false)
+        let dir = try TempDir()
+        defer { dir.remove() }
+        let files = ConfigFileStore(directory: dir.url)
+        try files.save(doc)
+        #expect(files.load() == .loaded(doc))
+        let saved = try JSONSerialization.jsonObject(with: Data(contentsOf: files.fileURL)) as? [String: Any]
+        let prefs = saved?["preferences"] as? [String: Any]
+        #expect(prefs?["showInScreenshots"] as? Bool == false)
+    }
+
+    @Test func versionOneFixturesWithoutTheKeyReadAsShownInScreenshots() throws {
+        for name in ["cfg-two-display.v1.json", "cfg-out-of-range.json", "cfg-too-small.json"] {
+            guard case .loaded(let doc) = ConfigCodec.decode(try Fixture.data(name)) else {
+                Issue.record("\(name) did not load")
+                continue
+            }
+            #expect(doc.preferences.showInScreenshots == true, "\(name)")
+        }
+        #expect(ConfigCodec.decode(try Fixture.data("bad-unknown-field.json")) == .corrupt(.invalid("unknown field color")))
     }
 
     @Test func missingFileIsFirstLaunch() throws {
@@ -110,7 +139,7 @@ struct PersistenceTests {
             return
         }
         #expect(big.preferences.squareSize == 160 && big.preferences.opacity == 0.30)
-        #expect(small.preferences.squareSize == 40, "30 pt clamps to the 40 pt minimum (Decision #57)")
+        #expect(small.preferences.squareSize == 30, "20 pt clamps to the 30 pt minimum (Decision #58)")
     }
 
     @Test func failedWriteKeepsThePreviousValidDocument() throws {

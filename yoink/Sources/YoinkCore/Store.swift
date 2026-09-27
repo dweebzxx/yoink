@@ -211,6 +211,11 @@ public final class YoinkStore {
         perform(locked ? "Lock Positions" : "Unlock Positions") { $0.preferences.positionsLocked = locked }
     }
 
+    /// Show in screenshots (Decision #60). Undoable like the other preferences.
+    public func setShowInScreenshots(_ on: Bool) {
+        perform("Change Screenshot Visibility") { $0.preferences.showInScreenshots = on }
+    }
+
     /// Hide/Show All (Decision #38). Remembered across relaunch; not an undo step.
     public func setSquaresHidden(_ hidden: Bool) {
         guard preferences.squaresHidden != hidden else { return }

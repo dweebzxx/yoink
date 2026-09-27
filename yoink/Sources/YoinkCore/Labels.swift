@@ -1,6 +1,6 @@
 import Foundation
 
-/// Label rules (Decision #27): one or two user-perceived characters (extended grapheme
+/// Label rules: one to four user-perceived characters (Decisions #27, #59) (extended grapheme
 /// clusters), not empty, not only spaces. Duplicates are allowed. A label never implies behavior.
 public enum LabelError: Error, Equatable, Sendable {
     case empty
@@ -9,9 +9,9 @@ public enum LabelError: Error, Equatable, Sendable {
 
     public var message: String {
         switch self {
-        case .empty: "Enter a label of one or two characters."
+        case .empty: "Enter a label of one to four characters."
         case .onlySpaces: "A label can't be only spaces."
-        case .tooLong: "A label can have at most two characters."
+        case .tooLong: "A label can have at most four characters."
         }
     }
 }
@@ -20,11 +20,21 @@ public enum LabelRules {
     public static func validate(_ label: String) -> LabelError? {
         if label.isEmpty { return .empty }
         if label.allSatisfy({ $0.isWhitespace }) { return .onlySpaces }
-        if label.count > 2 { return .tooLong }
+        if label.count > 4 { return .tooLong }
         return nil
     }
 
     public static func isValid(_ label: String) -> Bool { validate(label) == nil }
+}
+
+/// Decision #59 (Human follow-up, P07): one or two characters on one line; three or four
+/// characters on two rows, two on top and the rest below.
+public enum LabelLayout {
+    public static func rows(for label: String) -> [String] {
+        let chars = Array(label)
+        guard chars.count == 3 || chars.count == 4 else { return [label] }
+        return [String(chars[0..<2]), String(chars[2...])]
+    }
 }
 
 /// Settings search (Decision #42): case- and diacritic-insensitive match on label or text.

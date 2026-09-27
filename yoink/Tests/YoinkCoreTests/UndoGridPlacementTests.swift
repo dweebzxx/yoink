@@ -59,13 +59,13 @@ struct UndoGridPlacementTests {
         #expect(store.square(id)?.text == "one")
     }
 
-    @Test func sizeSettingStaysWithinFortyToOneSixty() {
+    @Test func sizeSettingStaysWithinThirtyToOneSixty() {
         let store = makeStore()
-        #expect(store.preferences.squareSize == 70, "default is still 70 pt")
-        store.setSquareSize(40)
-        #expect(store.preferences.squareSize == 40)
+        #expect(store.preferences.squareSize == 40, "default is 40 pt")
         store.setSquareSize(30)
-        #expect(store.preferences.squareSize == 40)
+        #expect(store.preferences.squareSize == 30)
+        store.setSquareSize(20)
+        #expect(store.preferences.squareSize == 30)
         store.setSquareSize(400)
         #expect(store.preferences.squareSize == 160)
     }
@@ -75,7 +75,7 @@ struct UndoGridPlacementTests {
         for size in stride(from: 70.0, through: 160, by: 10) { store.setSquareSize(size) }
         #expect(store.preferences.squareSize == 160)
         store.undo()
-        #expect(store.preferences.squareSize == 70)
+        #expect(store.preferences.squareSize == 40)
     }
 
     @Test func undoKeepsHiddenStateAndLoginItemAndNeverTouchesTheClipboard() {
@@ -84,9 +84,18 @@ struct UndoGridPlacementTests {
         store.setSquareSize(100)
         store.setSquaresHidden(true)
         store.undo()
-        #expect(store.preferences.squareSize == 70)
+        #expect(store.preferences.squareSize == 40)
         #expect(store.preferences.squaresHidden)
         #expect(clipboard.writes.isEmpty)
+    }
+
+    @Test func showInScreenshotsChangesAndOneUndoRestoresIt() {
+        let store = makeStore()
+        #expect(store.preferences.showInScreenshots)
+        store.setShowInScreenshots(false)
+        #expect(!store.preferences.showInScreenshots)
+        store.undo()
+        #expect(store.preferences.showInScreenshots)
     }
 
     @Test func aNewChangeClearsRedo() {
@@ -100,7 +109,7 @@ struct UndoGridPlacementTests {
 
     // MARK: Snap to Grid (Decision #40)
 
-    @Test(arguments: [40.0, 70.0, 160.0])
+    @Test(arguments: [30.0, 40.0, 160.0])
     func gridCellsNeverOverlapAndSquaresStayOnTheirDisplay(_ size: Double) throws {
         guard case .loaded(var doc) = ConfigCodec.decode(try Fixture.data("cfg-two-display.v1.json")) else {
             Issue.record("fixture did not load")

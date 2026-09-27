@@ -219,9 +219,17 @@ struct LabelBadge: View {
     var size: CGFloat = 26
 
     var body: some View {
-        Text(label)
-            .font(.system(size: size * 0.46, weight: .heavy, design: .rounded))
+        let rows = LabelLayout.rows(for: label)
+        // One and two characters keep 0.46; three and four characters are two rows and use 0.30
+        // so every character fits inside the badge (Decision #59).
+        let factor: CGFloat = rows.count == 2 ? 0.30 : 0.46
+        Text(rows.joined(separator: "\n"))
+            .font(.system(size: size * factor, weight: .heavy, design: .rounded))
+            .multilineTextAlignment(.center)
+            .lineLimit(rows.count)
+            .minimumScaleFactor(0.6)
             .foregroundStyle(Color(nsColor: Art.burntOrange700))
+            .padding(1)
             .frame(width: size, height: size)
             .background(RoundedRectangle(cornerRadius: size * 0.24).fill(Color(red: 0xFA / 255, green: 0xF7 / 255, blue: 0xF2 / 255)))
             .overlay(RoundedRectangle(cornerRadius: size * 0.24).stroke(Color(nsColor: Art.periwinkle500).opacity(0.45), lineWidth: 1))

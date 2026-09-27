@@ -109,7 +109,7 @@ struct SquareEditor: View {
             Section {
                 LabeledContent("Label") {
                     VStack(alignment: .trailing, spacing: 4) {
-                        TextField("", text: $labelDraft, prompt: Text("1–2 characters"))
+                        TextField("", text: $labelDraft, prompt: Text("1–4 characters"))
                             .textFieldStyle(.roundedBorder)
                             .autocorrectionDisabled()
                             .multilineTextAlignment(.center)
@@ -173,7 +173,7 @@ struct AddSquareSheet: View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Add Square").font(.headline)
             LabeledContent("Label") {
-                TextField("", text: $label, prompt: Text("1–2 characters"))
+                TextField("", text: $label, prompt: Text("1–4 characters"))
                     .autocorrectionDisabled()
                     .frame(width: 80)
             }
@@ -200,7 +200,7 @@ struct AddSquareSheet: View {
     }
 }
 
-// MARK: Appearance (Decisions #13, #24, #36)
+// MARK: Appearance (Decisions #13, #24, #36, #60)
 
 struct AppearancePane: View {
     let store: YoinkStore
@@ -224,8 +224,13 @@ struct AppearancePane: View {
                         Text("\(Int((store.preferences.opacity * 100).rounded()))%").monospacedDigit().foregroundStyle(.secondary).frame(width: 52, alignment: .trailing)
                     }
                 }
+                Toggle("Show in screenshots", isOn: Binding(get: { store.preferences.showInScreenshots }, set: { store.setShowInScreenshots($0) }))
             } footer: {
-                Text("Size and opacity apply to every square.").font(.caption).foregroundStyle(.secondary)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Size and opacity apply to every square.")
+                    Text("Turn this off to leave squares out of screenshots and screen recordings. They stay visible on your screen.")
+                }
+                .font(.caption).foregroundStyle(.secondary)
             }
         }
         .settingsForm()

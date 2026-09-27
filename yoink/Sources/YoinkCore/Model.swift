@@ -107,14 +107,15 @@ public struct HistoryEntry: Codable, Hashable, Identifiable, Sendable {
 }
 
 public struct Preferences: Codable, Hashable, Sendable {
-    public static let sizeRange: ClosedRange<Double> = 40...160      // Decisions #36, #57 (default stays 70)
+    public static let sizeRange: ClosedRange<Double> = 30...160      // Decisions #36, #57, #58
     public static let opacityRange: ClosedRange<Double> = 0.30...1.0 // Decision #24
 
-    public var squareSize: Double = 70
+    public var squareSize: Double = 40
     public var opacity: Double = 0.85
     public var playSound = true
     public var feedbackMode: FeedbackMode = .checkmark
     public var positionsLocked = false
+    public var showInScreenshots = true
     public var launchAtLogin = false
     public var squaresHidden = false
     public var hideShowShortcut: KeyShortcut? = .defaultHideShowAll
@@ -131,11 +132,13 @@ public struct Preferences: Codable, Hashable, Sendable {
     }
 
     private enum CodingKeys: String, CodingKey {
-        case squareSize, opacity, playSound, feedbackMode, positionsLocked
+        case squareSize, opacity, playSound, feedbackMode, positionsLocked, showInScreenshots
         case launchAtLogin, squaresHidden, hideShowShortcut, snapShortcut
     }
 
-    // Every key is required. The two app shortcuts may be `null` (cleared) but not absent.
+    // Every key is required except `showInScreenshots`: documents saved before that setting existed
+    // have no such key and read as `true`; the schema version stays 1 (Decision #60).
+    // The two app shortcuts may be `null` (cleared) but not absent.
     public init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
         squareSize = try c.decode(Double.self, forKey: .squareSize)
@@ -143,6 +146,7 @@ public struct Preferences: Codable, Hashable, Sendable {
         playSound = try c.decode(Bool.self, forKey: .playSound)
         feedbackMode = try c.decode(FeedbackMode.self, forKey: .feedbackMode)
         positionsLocked = try c.decode(Bool.self, forKey: .positionsLocked)
+        showInScreenshots = try c.decodeIfPresent(Bool.self, forKey: .showInScreenshots) ?? true
         launchAtLogin = try c.decode(Bool.self, forKey: .launchAtLogin)
         squaresHidden = try c.decode(Bool.self, forKey: .squaresHidden)
         guard c.contains(.hideShowShortcut), c.contains(.snapShortcut) else {
@@ -159,6 +163,7 @@ public struct Preferences: Codable, Hashable, Sendable {
         try c.encode(playSound, forKey: .playSound)
         try c.encode(feedbackMode, forKey: .feedbackMode)
         try c.encode(positionsLocked, forKey: .positionsLocked)
+        try c.encode(showInScreenshots, forKey: .showInScreenshots)
         try c.encode(launchAtLogin, forKey: .launchAtLogin)
         try c.encode(squaresHidden, forKey: .squaresHidden)
         try c.encode(hideShowShortcut, forKey: .hideShowShortcut)

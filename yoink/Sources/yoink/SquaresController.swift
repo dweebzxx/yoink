@@ -27,10 +27,17 @@ final class SquaresController: NSObject, SquareViewDelegate, NSMenuDelegate {
         let prefs = store.preferences
         let size = CGFloat(prefs.squareSize)
         let displays = ScreenMap.displays
+        let sharing: NSWindow.SharingType = prefs.showInScreenshots ? .readOnly : .none
+        if OverlayPanel.sharing != sharing {
+            OverlayPanel.sharing = sharing
+            preview.refreshSharing()
+            drag.refreshSharing()
+        }
         var seen = Set<UUID>()
         for square in store.squares {
             seen.insert(square.id)
             let entry = panels[square.id] ?? makePanel(for: square.id, size: size)
+            entry.panel.sharingType = sharing
             entry.view.configure(label: square.label, text: square.text, locked: prefs.positionsLocked, opacity: CGFloat(prefs.opacity))
             if !entry.view.isDragging,
                let resolved = PlacementResolver.resolve(square.placement, squareSize: prefs.squareSize, displays: displays),
