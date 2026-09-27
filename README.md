@@ -44,7 +44,7 @@ That's it. That's the whole trick. yo!nk only copies. It never runs, pastes, or 
 
 ## Status
 
-Early days! yo!nk is at version 0.2.0, which means initial development: things can still change.
+Early days! yo!nk is at version 0.2.1, which means initial development: things can still change.
 
 **Download it:** grab the zip from the [Releases page](https://github.com/dweebzxx/yoink/releases) (it's a pre-release), unzip it, and put `yo!nk.app` wherever you like. It's signed ad hoc rather than notarized, so macOS may block the first launch. If it does, open System Settings, go to Privacy & Security, and choose **Open Anyway**.
 

@@ -11,8 +11,8 @@ ASSETS="$REPO_DIR/assets/prompt-attachments/app-assets"
 WORK="$PKG_DIR/.build/app-resources"
 APP_NAME='yo!nk.app'
 APP="$REPO_DIR/dist/$APP_NAME"
-VERSION="0.2.0"
-BUILD_NUMBER="1"
+VERSION="0.2.1"
+BUILD_NUMBER="2"
 
 echo "==> Release build"
 swift build --package-path "$PKG_DIR" -c release --product yoink

@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-09-27
+### Changed
+- The release zip is now named `yoink-0.2.1.zip`, an ASCII filename that needs no quoting or escaping in a shell. The app bundle inside it is unchanged: still `yo!nk.app`.
+
 ## [0.2.0] - 2026-09-27
 ### Added
 - Floating squares: one independent, translucent, always-on-top square per snippet, with a label of one to four characters. A four-character label is shown on two rows of two characters.
