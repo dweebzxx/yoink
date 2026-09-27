@@ -11,7 +11,7 @@ ASSETS="$REPO_DIR/assets/prompt-attachments/app-assets"
 WORK="$PKG_DIR/.build/app-resources"
 APP_NAME='yo!nk.app'
 APP="$REPO_DIR/dist/$APP_NAME"
-VERSION="1.0.0"
+VERSION="0.2.0"
 BUILD_NUMBER="1"
 
 echo "==> Release build"
